@@ -73,4 +73,55 @@ int main()
 
     free(a);
     return 0;
+}#include <stdio.h>
+#include <stdlib.h>
+
+void counting_sort(char a[], int n) {
+    int max = 26; // letras de 'a' a 'z'
+    char B[n];    // arreglo auxiliar
+    int C[max];   // conteo
+
+    // inicializar conteo
+    for (int i = 0; i < max; ++i)
+        C[i] = 0;
+
+    // contar ocurrencias
+    for (int j = 0; j < n; ++j)
+        C[a[j] - 'a']++;
+
+    // acumular
+    for (int k = 1; k < max; ++k)
+        C[k] += C[k-1];
+
+    // construir salida (de atrás hacia adelante)
+    for (int l = n-1; l >= 0; --l) {
+        B[C[a[l] - 'a'] - 1] = a[l];
+        C[a[l] - 'a']--;
+    }
+
+    // copiar resultado a a[]
+    for (int i = 0; i < n; i++)
+        a[i] = B[i];
+}
+
+int main() {
+    int n;
+    if (scanf("%d", &n) != 1 || n <= 0) return 0;
+
+    char *a = (char*)malloc(sizeof(char) * (n+1));
+    if (!a) return 0;
+
+    for (int i = 0; i < n; ++i) {
+        scanf(" %c", &a[i]); // leer letra
+    }
+
+    counting_sort(a, n);
+
+    for (int i = 0; i < n; ++i) {
+        printf("%c", a[i]);
+    }
+    putchar('\n');
+
+    free(a);
+    return 0;
 }
