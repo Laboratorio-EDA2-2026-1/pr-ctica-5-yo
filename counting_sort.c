@@ -6,20 +6,24 @@ void counting_sort(char a[], int n){
 	int max=26; //letras de a-z
 	char B[n]; // arreglo auxiliar
 	int C[max]; // arrglo de conteo
-
+	// inicializar conteo
 	for (int i = 0; i < max; ++i){
 		C[i]=0;
 	}
+	// contar ocurrencias
 	for (int j = 0; j < n; ++j){
 		C[a[j]-'a']++;
 	}
+	// acumular
 	for (int k = 1; k < max; ++k){
 		C[k]=C[k]+C[k-1];
 	}
+	// acomodar de atras hacia adelante 
 	for (int l = n-1; l >=0; --l){
 		B[C[a[l]-'a']-1]=a[l];
 		C[a[l]-'a']--;
 	}     
+	// copiar el resultado en a[]
 	for (int i = 0; i < n; ++i){
 		a[i]=B[i];                                                                                                                                     
 	}
