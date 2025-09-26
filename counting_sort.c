@@ -1,4 +1,5 @@
 // Escribe aquí la implementación de los ejercicios de Counting Sort.
+// Ejercicio 1
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -54,6 +55,8 @@ int main()
     free(a);
     return 0;
 }
+
+// Ejercicio 2
 #include <stdio.h>
 #include <stdlib.h>
 
