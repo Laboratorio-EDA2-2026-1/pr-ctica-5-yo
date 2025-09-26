@@ -31,3 +31,46 @@ int main() {
 
     return 0;
 }// Escribe aquí la implementación de los ejercicios de Counting Sort.
+#include <stdio.h>
+
+void counting_sort(char a[], int n);
+
+void counting_sort(char a[], int n){
+	int max=; 
+
+	int B[n];
+	int C[max];
+
+	for (int i = 0; i < max; ++i){
+		C[i]=0;
+	}
+	for (int j = 0; j < n-1; ++j){
+		C[a[j]]=C[a[j]]+1;
+	}
+	for (int k = 1; k < max; ++k){
+		C[k]=C[k]+C[k-1];
+	}
+	for (int l = 0; l < n-1; --l){
+		B[C[a[l]-1]]=a[l];
+		C[a[l]]=C[a[l]]-1;
+	}                                                                                                             
+}
+
+int main()
+{
+	int n; if (scanf("%d", &n) != 1 || n <= 0) return 0;
+    char *a = (char*)malloc(sizeof(char) * n);
+    if (!a) return 0;
+    for (int i = 0; i < n; ++i) scanf("%d", &a[i]);
+
+    counting_sort(a, n)
+
+    for (int i = 0; i < n; ++i) {
+        if (i) putchar(' ');
+        printf("%d", a[i]);
+    } 
+    putchar('\n');
+
+    free(a);
+    return 0;
+}
