@@ -1,125 +1,50 @@
+// Escribe aquí la implementación de los ejercicios de Counting Sort.
 #include <stdio.h>
-#include <string.h>
-
-void countingSortString(char s[]) {
-    int count[26] = {0}; // arreglo para contar letras (a-z)
-
-    // contar cada letra
-    for (int i = 0; s[i] != '\0'; i++) {
-        count[s[i] - 'a']++;
-    }
-
-    // reconstruir la cadena en orden
-    int index = 0;
-    for (int i = 0; i < 26; i++) {
-        while (count[i] > 0) {
-            s[index++] = i + 'a';
-            count[i]--;
-        }
-    }
-}
-
-int main() {
-    char s1[] = "edsab";
-    char s2[] = "geeksforgeeks";
-
-    countingSortString(s1);
-    countingSortString(s2);
-
-    printf("Resultado 1: %s\n", s1); // abdes
-    printf("Resultado 2: %s\n", s2); // eeeefggkkorss
-
-    return 0;
-}// Escribe aquí la implementación de los ejercicios de Counting Sort.
-#include <stdio.h>
-
-void counting_sort(char a[], int n);
+#include <stdlib.h>
 
 void counting_sort(char a[], int n){
-	int max=; 
-
-	int B[n];
-	int C[max];
+	int max=26; //letras de a-z
+	char B[n]; // arreglo auxiliar
+	int C[max]; // arrglo de conteo
 
 	for (int i = 0; i < max; ++i){
 		C[i]=0;
 	}
-	for (int j = 0; j < n-1; ++j){
-		C[a[j]]=C[a[j]]+1;
+	for (int j = 0; j < n; ++j){
+		C[a[j]-'a']++;
 	}
 	for (int k = 1; k < max; ++k){
 		C[k]=C[k]+C[k-1];
 	}
-	for (int l = 0; l < n-1; --l){
-		B[C[a[l]-1]]=a[l];
-		C[a[l]]=C[a[l]]-1;
-	}                                                                                                             
+	for (int l = n-1; l >=0; --l){
+		B[C[a[l]-'a']-1]=a[l];
+		C[a[l]-'a']--;
+	}     
+	for (int i = 0; i < n; ++i){
+		a[i]=B[i];                                                                                                                                     
+	}
 }
 
 int main()
 {
-	int n; if (scanf("%d", &n) != 1 || n <= 0) return 0;
-    char *a = (char*)malloc(sizeof(char) * n);
-    if (!a) return 0;
-    for (int i = 0; i < n; ++i) scanf("%d", &a[i]);
-
-    counting_sort(a, n)
-
-    for (int i = 0; i < n; ++i) {
-        if (i) putchar(' ');
-        printf("%d", a[i]);
-    } 
-    putchar('\n');
-
-    free(a);
-    return 0;
-}#include <stdio.h>
-#include <stdlib.h>
-
-void counting_sort(char a[], int n) {
-    int max = 26; // letras de 'a' a 'z'
-    char B[n];    // arreglo auxiliar
-    int C[max];   // conteo
-
-    // inicializar conteo
-    for (int i = 0; i < max; ++i)
-        C[i] = 0;
-
-    // contar ocurrencias
-    for (int j = 0; j < n; ++j)
-        C[a[j] - 'a']++;
-
-    // acumular
-    for (int k = 1; k < max; ++k)
-        C[k] += C[k-1];
-
-    // construir salida (de atrás hacia adelante)
-    for (int l = n-1; l >= 0; --l) {
-        B[C[a[l] - 'a'] - 1] = a[l];
-        C[a[l] - 'a']--;
-    }
-
-    // copiar resultado a a[]
-    for (int i = 0; i < n; i++)
-        a[i] = B[i];
-}
-
-int main() {
-    int n;
-    if (scanf("%d", &n) != 1 || n <= 0) return 0;
+	int n; 
+	printf("Ingresa el número de letras que deceas ingresar: ");
+	if (scanf("%d", &n) != 1 || n <= 0) return 0;
 
     char *a = (char*)malloc(sizeof(char) * (n+1));
     if (!a) return 0;
 
-    for (int i = 0; i < n; ++i) {
-        scanf(" %c", &a[i]); // leer letra
+    printf("Ingresa las letras sin espacios: ");
+    for (int i = 0; i < n; ++i){
+    	scanf(" %c", &a[i]);
     }
 
     counting_sort(a, n);
 
+    printf("Letras ordenadas: ");
     for (int i = 0; i < n; ++i) {
         printf("%c", a[i]);
-    }
+    } 
     putchar('\n');
 
     free(a);
