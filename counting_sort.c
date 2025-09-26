@@ -54,3 +54,51 @@ int main()
     free(a);
     return 0;
 }
+#include <stdio.h>
+#include <stdlib.h>
+
+void sort_colors(int A[], int n) {
+    int low = 0, mid = 0, high = n - 1;
+
+    while (mid <= high) {
+        if (A[mid] == 0) { 
+            // swap con low
+            int temp = A[low];
+            A[low] = A[mid];
+            A[mid] = temp;
+            low++;
+            mid++;
+        } else if (A[mid] == 1) { 
+            mid++;
+        } else { 
+            // A[mid] == 2
+            int temp = A[mid];
+            A[mid] = A[high];
+            A[high] = temp;
+            high--;
+        }
+    }
+}
+
+int main() {
+    int n;
+    if (scanf("%d", &n) != 1 || n <= 0) return 0;
+
+    int *A = (int*)malloc(sizeof(int) * n);
+    if (!A) return 0;
+
+    for (int i = 0; i < n; ++i) {
+        scanf("%d", &A[i]); // leer colores: 0,1,2
+    }
+
+    sort_colors(A, n);
+
+    for (int i = 0; i < n; ++i) {
+        if (i) putchar(' ');
+        printf("%d", A[i]);
+    }
+    putchar('\n');
+
+    free(A);
+    return 0;
+}
