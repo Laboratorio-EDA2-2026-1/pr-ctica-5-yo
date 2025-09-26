@@ -85,17 +85,23 @@ void sort_colors(int A[], int n) {
 
 int main() {
     int n;
-    if (scanf("%d", &n) != 1 || n <= 0) return 0;
+    printf("Ingresa el número de elemetos: ");
+    if (scanf(" %d", &n) != 1 || n <= 0) return 0;
 
     int *A = (int*)malloc(sizeof(int) * n);
     if (!A) return 0;
 
+    printf("Ingresa los elemetos: \n");
+    printf("0. Rojo\n");
+    printf("1. Blanco\n");
+    printf("2. Azul\n");
     for (int i = 0; i < n; ++i) {
         scanf("%d", &A[i]); // leer colores: 0,1,2
     }
 
     sort_colors(A, n);
 
+    printf("Elementos ordemados: ");
     for (int i = 0; i < n; ++i) {
         if (i) putchar(' ');
         printf("%d", A[i]);
